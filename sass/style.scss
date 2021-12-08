@@ -1,0 +1,1946 @@
+@charset 'UTF-8';
+@use "./setting" as *;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&display=swap");
+
+/*==========================================================================
+
+# 初期設定
+
+========================================================================== */
+body {
+  color: $font-main;
+  font-size: 16px;
+  font-weight: $medium;
+  font-family: "Times New Roman", "游明朝", "Yu Mincho", "游明朝体", "YuMincho", "ヒラギノ明朝 Pro W3",
+    "Hiragino Mincho Pro", "HiraMinProN-W3", "HGS明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "Noto Serif JP", serif;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+
+  &.fixed {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+main {
+  background-color: $main-color;
+}
+
+img {
+  width: 100%;
+}
+/*
+# form初期化
+==================================== */
+input,
+button,
+select,
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: $main-color;
+  border: none;
+  border-radius: 0;
+  font: inherit;
+  outline: none;
+  color: inherit;
+}
+
+input::placeholder {
+  font-size: 14px;
+  color: #797878;
+}
+
+select {
+  font-size: 14px;
+
+  &:invalid {
+    color: #797878;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="submit"],
+input[type="button"],
+button,
+select {
+  cursor: pointer;
+}
+
+.is-pc-hidden {
+  display: none;
+  @include mq("sp") {
+    display: inline;
+  }
+}
+
+.is-mb-hidden {
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.is-tab-hidden {
+  @include mq("tab") {
+    display: none;
+  }
+}
+
+/*==========================================================================
+
+# 共通スタイル
+
+========================================================================== */
+/*
+# section
+==================================== */
+.section {
+  padding-top: 60px;
+
+  &-inner {
+    max-width: $pc-inner;
+    width: 100%;
+    margin: 0 auto;
+
+    @include mq("sp") {
+      max-width: $sp-inner;
+    }
+
+    @include mq("tab") {
+      max-width: $tab-inner;
+    }
+  }
+
+  &-logo {
+    width: 40px;
+    margin: 0 auto;
+
+    @include mq("sp") {
+      width: 30px;
+    }
+  }
+
+  &-title {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 20px;
+
+    @include mq("sp") {
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    @include mq("tab") {
+      font-size: 32px;
+    }
+  }
+}
+
+.lower-inner {
+  max-width: 1220px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @include mq("sp") {
+    max-width: $sp-inner;
+    padding: 0;
+  }
+
+  @include mq("tab") {
+    max-width: $tab-inner;
+    padding: 0;
+  }
+}
+
+/*
+# ボタン
+==================================== */
+.button {
+  border: solid 1px #707070;
+  display: inline-block;
+  transition: all 0.4s ease 0s;
+
+  @media screen and (min-width: 1025px) {
+    &:hover {
+      background-color: $font-main;
+      color: $main-color;
+      transition: all 0.4s ease 0s;
+    }
+  }
+}
+
+/*==========================================================================
+
+# header
+
+========================================================================== */
+.header {
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $header;
+  width: 100%;
+  transition: all 0.3s ease 0s;
+
+  @media screen and (max-width:1024px) {
+    height: 60px;
+  }
+
+  &.is-black {
+    background-color: $main-color;
+    transition: all 0.5s ease 0s;
+
+    .header-nav-item {
+      a {
+        color: $font-main;
+      }
+    }
+  }
+
+  &-inner {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    height: inherit;
+
+    @include mq("sp") {
+      padding: 0 10px;
+    }
+  }
+
+  &-logo {
+    width: 200px;
+
+    @include mq("sp") {
+      width: 130px;
+    }
+
+    @include mq('tab') {
+      width: 160px;
+    }
+
+    a {
+      @media screen and (min-width: 1025px) {
+        transition: all 0.3s ease 0s;
+        &:hover {
+          opacity: 0.6;
+          transition: all 0.3s ease 0s;
+        }
+      }
+    }
+  }
+
+  &-nav {
+    display: flex;
+    margin-left: 120px;
+
+    @media screen and (max-width:1024px) {
+      display: none;
+    }
+
+    @include mq("tab") {
+      margin-left: 140px;
+    }
+
+    &-list {
+      display: flex;
+    }
+
+    &-item {
+      &:nth-child(2) {
+        margin-left: 34px;
+      }
+
+      &:nth-child(3) {
+        margin-left: 30px;
+      }
+
+      a {
+        color: $main-color;
+        font-weight: $extrabold;
+        @media screen and (min-width: 1025px) {
+          transition: all 0.3s ease 0s;
+
+          &:hover {
+            opacity: 0.6;
+            transition: all 0.3s ease 0s;
+          }
+        }
+      }
+    }
+  }
+
+  &-button {
+    margin-left: auto;
+    background: #978f10;
+    color: $main-color;
+    font-weight: $extrabold;
+    display: inline-block;
+    padding: 19px 37px 19px 69px;
+    position: relative;
+    font-family: inherit;
+    transition: all 0.3s ease 0s;
+
+    @include mq("sp") {
+      padding: 8px 16px 8px 35px;
+      font-size: 14px;
+      margin-right: 35px;
+    }
+
+    @include mq("tab") {
+      // padding: 19px 30px 19px 59px;
+      padding: 11px 20px 10px 49px;
+      font-size: 15px;
+      margin-right: 30px;
+    }
+
+    @media screen and (min-width: 1025px) {
+      &:hover {
+        opacity: 0.6;
+        transition: all 0.3s ease 0s;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 22px;
+      height: 22px;
+      top: 50%;
+      left: 37px;
+      transform: translateY(-50%);
+      background: url(../img/icon/calender.png) no-repeat center center / contain;
+
+      @include mq("sp") {
+        width: 15px;
+        height: 15px;
+        top: 48%;
+        left: 12px;
+      }
+
+      @include mq("tab") {
+        left: 20px;
+        top: 48%;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+/*
+# hamburger-menu
+==================================== */
+.hamburger {
+  &-icon {
+    position: fixed;
+    top: 19px;
+    right: 10px;
+    z-index: $hamburger-icon;
+    display: none;
+    transition: all 0.5s ease 0s;
+
+    @media screen and (max-width:1024px) {
+      display: block;
+    }
+
+    &.is-open {
+      transition: all 0.5s ease 0s;
+
+      .hamburger-icon-bar1,
+      .hamburger-icon-bar2,
+      .hamburger-icon-bar3 {
+        background-color: $font-main;
+      }
+
+      .hamburger-icon-bar1 {
+        transform: rotate(-45deg);
+        top: 10px;
+        transition: all 0.5s ease 0s;
+      }
+
+      .hamburger-icon-bar2 {
+        display: none;
+        transition: all 0.5s ease 0s;
+      }
+
+      .hamburger-icon-bar3 {
+        transform: rotate(45deg);
+        top: 10px;
+        transition: all 0.5s ease 0s;
+      }
+    }
+
+    &-bars {
+      width: 22px;
+      height: 22px;
+      display: block;
+      position: relative;
+    }
+
+    &-bar1,
+    &-bar2,
+    &-bar3 {
+      position: absolute;
+      width: 22px;
+      height: 2px;
+      background-color: $main-color;
+      top: 0;
+      left: 0;
+      transition: all 0.5s ease 0s;
+
+      &.is-black {
+        background-color: $font-main;
+      }
+    }
+
+    &-bar1 {
+      top: 0;
+    }
+
+    &-bar2 {
+      top: 10px;
+    }
+
+    &-bar3 {
+      top: 20px;
+    }
+  }
+
+  &-box {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(#000, 0.16);
+    z-index: $hamburger-box;
+    transform: translateX(105%);
+    transition: all 0.5s ease 0s;
+
+    &.is-open {
+      transform: translateX(0);
+      transition: 0.5s ease 0s;
+    }
+  }
+
+  &-inner {
+    padding-left: 10px;
+  }
+
+  &-logo {
+    width: 130px;
+    padding-top: 17px;
+  }
+
+  &-nav {
+    margin-top: 80px;
+    padding-right: 80px;
+
+    &-item {
+      border-bottom: 1px dotted #707070;
+
+      a {
+        display: block;
+        color: $font-main;
+        text-decoration: none;
+        padding: 0 20px 16px 35px;
+        position: relative;
+
+        &::before {
+          position: absolute;
+          content: ">";
+          width: 8px;
+          height: 11px;
+          top: 0;
+          left: 10px;
+        }
+      }
+
+      &:not(:first-child) {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  &-button {
+    margin: 40px 0 0;
+    padding: 20px 102px 20px 120px;
+    font-size: 16px;
+
+    &::before {
+      width: 18px;
+      height: 18px;
+      left: 92px;
+    }
+  }
+}
+
+/*==========================================================================
+
+# modal
+
+========================================================================== */
+.modal {
+  display: none;
+  width: 550px;
+  background-color: $main-color;
+  padding: 29px 60px 90px 61px;
+  z-index: $modal;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @include mq("sp") {
+    width: 89.3%;
+    padding: 29px 20px 90px 20px;
+  }
+
+  &-overlay {
+    z-index: $modal-overlay;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: $main-color;
+    opacity: 0.3;
+  }
+
+  &-close {
+    width: 18px;
+    height: 18px;
+    margin-left: 450px;
+    margin-top: -10px;
+    cursor: pointer;
+
+    @include mq("sp") {
+      margin-left: auto;
+    }
+  }
+
+  &-title {
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 29.5px;
+    margin-top: -8px;
+    border-bottom: solid 1px #707070;
+    @include mq("sp") {
+      padding-bottom: 20px;
+      font-size: 18px;
+    }
+  }
+
+  &-inner {
+    margin-top: 30.5px;
+    @include mq("sp") {
+      margin-top: 30px;
+    }
+  }
+}
+
+.form {
+  &-item {
+    &:not(:first-child) {
+      margin-top: 13px;
+    }
+
+    &-label {
+      @include mq("sp") {
+        font-size: 14px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    &-input {
+      margin-top: 14px;
+      border: solid 1px #e7e7e7;
+      padding: 5px 0 5px 10px;
+    }
+  }
+
+  &-button {
+    margin-top: 63px;
+    text-align: center;
+
+    @include mq("sp") {
+      margin-top: 30px;
+    }
+  }
+
+  &-submit-message {
+    font-weight: $extrabold;
+    text-align: center;
+    display: none;
+  }
+}
+
+select,
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  font-size: 14px;
+}
+
+input[type="submit"] {
+  padding: 12px 67px 9px 65px;
+  border: solid 1px #707070;
+  transition: all 0.4s ease 0s;
+
+  @media screen and (min-width: 1025px) {
+    &:hover {
+      background-color: $font-main;
+      color: $main-color;
+      transition: all 0.4s ease 0s;
+    }
+  }
+
+  @include mq("sp") {
+    font-size: 14px;
+    padding: 13px 60px;
+  }
+}
+
+/*==========================================================================
+
+# メインビジュアル
+
+========================================================================== */
+/*
+# slider
+==================================== */
+@-webkit-keyframes zoomUp {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes zoomUp {
+  /* 1.15倍させる指定 */
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+  }
+}
+
+.swiper-slide {
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.swiper-slide-active .slide-img,
+.swiper-slide-duplicate-active .slide-img,
+.swiper-slide-prev .slide-img {
+  /* 12秒かけて拡大させる */
+  -webkit-animation: zoomUp 12s linear 0s;
+  animation: zoomUp 12s linear 0s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.slide-img {
+  background-size: cover;
+  background-position: center center; /* 背景画像は中央を軸に表示させる */
+  height: 1079px; /* 1079pxの高さで表示させる */
+  @include mq("sp") {
+    height: 550px;
+  }
+}
+
+/*
+# mv
+==================================== */
+.mv {
+  &-title {
+    position: absolute;
+    z-index: $mv;
+    font-size: 34px;
+    color: #fff;
+    top: 33.5%;
+    left: 67.1%;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    font-weight: 700;
+    text-shadow: 2px 1px 3px rgba(0, 0, 0, 1);
+    letter-spacing: 0.51rem;
+    @include mq("sp") {
+      font-size: 26px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @include mq("tab") {
+      top: 36.5%;
+      left: 55.3%;
+    }
+
+    span {
+      display: block;
+      margin-right: 48px;
+      @include mq("sp") {
+        margin-right: 45px;
+      }
+    }
+  }
+}
+
+/*==========================================================================
+
+# desc
+
+========================================================================== */
+.desc {
+  background-image: url(../img/bg/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 64px 0 54px;
+  height: 681px;
+
+  @include mq("sp") {
+    padding: 50px 20px 55px;
+    height: auto;
+  }
+
+  &-box {
+    max-width: 1180px;
+    padding: 0 6vw 0 10.3vw;
+    margin: 0 auto;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+
+    @include mq("pc") {
+      margin: 0 auto;
+    }
+
+    @include mq("sp") {
+      margin: 0;
+      padding: 0;
+      writing-mode: horizontal-tb;
+      -ms-writing-mode: rl-tb;
+    }
+
+    @include mq("tab") {
+      max-width: $tab-inner;
+      margin: 0 auto;
+      padding: 0;
+    }
+  }
+
+  &-title {
+    font-size: 28px;
+    letter-spacing: 0.88rem;
+    margin-left: 106px;
+
+    @include mq("sp") {
+      font-size: 24px;
+      margin-left: 0;
+      letter-spacing: 0.5rem;
+    }
+
+    @include mq("tab") {
+      font-size: 24px;
+      margin-left: 40px;
+    }
+
+    span {
+      display: block;
+      margin-right: 26px;
+      padding-top: 85px;
+
+      @include mq("sp") {
+        padding-top: 15px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &-text {
+    padding-top: 85px;
+    text-orientation: upright;
+    letter-spacing: 0.37rem;
+    line-height: 2.3rem;
+
+    &:nth-of-type(1) {
+      margin-left: 100px;
+
+      @include mq("sp") {
+        margin-left: 0;
+      }
+
+      @include mq("tab") {
+        margin-left: 40px;
+      }
+    }
+
+    &:nth-of-type(2) {
+      margin-left: 100px;
+
+      @include mq("sp") {
+        margin-left: 0;
+      }
+
+      @include mq("tab") {
+        margin-left: 40px;
+      }
+    }
+
+    &:nth-of-type(3) {
+      margin-left: 105px;
+
+      @include mq("sp") {
+        margin-left: 0;
+      }
+
+      @include mq("tab") {
+        margin-left: 40px;
+      }
+    }
+
+    @include mq("sp") {
+      padding-top: 20px;
+      margin-right: 0;
+      letter-spacing: 0.1rem;
+      line-height: 1.5rem;
+      text-orientation: mixed;
+      font-size: 14px;
+    }
+
+    @include mq("tab") {
+      line-height: 1.8rem;
+    }
+  }
+
+  &-name {
+    margin-top: 379px;
+    font-size: 22px;
+    letter-spacing: 0.61rem;
+
+    @include mq("sp") {
+      text-align: right;
+      margin: 25px 0 0;
+      font-size: 20px;
+      letter-spacing: 0.4rem;
+    }
+
+    @include mq("tab") {
+      margin: 418px 40px 0 0;
+      font-size: 20px;
+    }
+  }
+}
+
+/*==========================================================================
+
+# about
+
+========================================================================== */
+.about {
+  padding: 106px 0 78px;
+
+  @include mq("sp") {
+    padding: 80px 0 150px;
+  }
+
+  &-box {
+    display: flex;
+    @include mq("sp") {
+      display: block;
+    }
+
+    &:not(:first-child) {
+      margin-top: 122px;
+    }
+
+    &:nth-of-type(1),
+    &:nth-of-type(3) {
+      .about-info {
+        margin: 20px 0 0 7.1vw;
+
+        @include mq("sp") {
+          margin: -450px 0 0 0;
+        }
+
+        @include mq("tab") {
+          margin-left: 20px;
+          padding-right: 12px;
+        }
+
+        &-button {
+          margin-top: 66px;
+        }
+      }
+    }
+
+    &:nth-of-type(1) {
+      .about-info-button {
+        padding: 18px 44px 16px 43px;
+      }
+    }
+
+    &:nth-of-type(2) {
+      justify-content: end;
+      flex-direction: row-reverse;
+      @include mq("sp") {
+        margin-top: 150px;
+      }
+
+      .about-info {
+        margin: 42px 9.1vw 0 0;
+        @media screen and (max-width: 1024px) {
+          margin-right: 0;
+        }
+
+        @include mq("sp") {
+          margin-top: -450px;
+        }
+
+        @include mq("tab") {
+          padding: 0 0 0 20px;
+          margin-right: auto;
+        }
+
+        &-button {
+          margin-top: 33px;
+          padding: 18px 52px 18px;
+        }
+      }
+    }
+
+    &:nth-of-type(3) {
+      @include mq("sp") {
+        margin-top: 150px;
+      }
+      .about-info-button {
+        padding: 17px 51px;
+      }
+    }
+  }
+
+  &-picture {
+    width: 54.69vw;
+    height: 545px;
+
+    @include mq("sp") {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+
+    @include mq("tab") {
+      width: 55vw;
+      height: 71.7vw;
+      object-fit: cover;
+    }
+
+    &-room {
+      background: url(../img/picture/top/room-top.jpg) no-repeat center center / cover;
+    }
+
+    &-menu {
+      background: url(../img/picture/top/menu-top.jpg) no-repeat center center / cover;
+    }
+
+    &-spa {
+      background: url(../img/picture/top/spa-top.jpg) no-repeat center center / cover;
+    }
+  }
+
+  &-info {
+    @include mq("sp") {
+      padding: 0 20px;
+      margin-top: -450px;
+      color: $main-color;
+      text-shadow: 2px 1px 3px rgba(0, 0, 0, 1);
+    }
+
+    @include mq("tab") {
+      width: calc(100% - 55vw);
+    }
+
+    &-title {
+      font-size: 36px;
+      line-height: (62 / 36);
+
+      @include mq("sp") {
+        font-size: 25px;
+        margin-top: 20px;
+      }
+
+      @include mq("tab") {
+        font-size: 25px;
+      }
+    }
+
+    &-text {
+      margin-top: 55px;
+      line-height: (32 / 16);
+
+      @include mq("sp") {
+        margin-top: 25px;
+        font-size: 14px;
+      }
+
+      @include mq("tab") {
+        margin-top: 30px;
+      }
+    }
+
+    &-button {
+      @include mq("tab") {
+        margin-top: 50px;
+      }
+    }
+  }
+}
+
+/*==========================================================================
+
+# plan
+
+========================================================================== */
+.plan {
+  background-image: url(../img/bg/bg02.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 135px;
+
+  &-inner {
+    max-width: 1260px;
+    padding: 0 2%;
+
+    @include mq("sp") {
+      max-width: $sp-inner;
+    }
+
+    @include mq("tab") {
+      max-width: $tab-inner;
+      padding: 0;
+    }
+  }
+
+  &-list {
+    display: flex;
+    margin-top: 60px;
+
+    @media screen and (max-width: 1024px) {
+      display: block;
+    }
+  }
+
+  &-item {
+    width: calc(33.33% - 4.9vw * 2 / 3);
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
+
+    &:not(:first-child) {
+      margin-left: 4.9vw;
+      @media screen and (max-width: 1024px) {
+        margin-left: 0;
+        margin-top: 50px;
+      }
+
+      @include mq("tab") {
+        margin-top: 80px;
+      }
+    }
+
+    &-picture {
+      max-width: 331px;
+
+      @media screen and (max-width: 1024px) {
+        max-width: 100%;
+      }
+
+      img {
+        max-height: 209px;
+
+        @include mq("tab") {
+          max-height: none;
+        }
+      }
+    }
+
+    &-title {
+      margin-top: 28px;
+      font-size: 20px;
+      line-height: (32 / 20);
+
+      @include mq("sp") {
+        margin-top: 25px;
+      }
+
+      @include mq("tab") {
+        margin-top: 23px;
+        font-size: 25px;
+      }
+    }
+
+    &-text {
+      margin-top: 20px;
+      line-height: 2;
+
+      @include mq("sp") {
+        margin-top: 15px;
+      }
+
+      @include mq("tab") {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+/*==========================================================================
+
+# news
+
+========================================================================== */
+.news {
+  padding-bottom: 60px;
+
+  &-tab {
+    text-align: center;
+    margin-top: 43px;
+    @include mq("sp") {
+      margin-top: 25px;
+    }
+
+    li {
+      display: inline-block;
+      cursor: pointer;
+      line-height: 1;
+      @include mq("sp") {
+        font-size: 14px;
+      }
+
+      &:not(:first-child) {
+        margin-left: 50px;
+        @include mq("sp") {
+          margin-left: 40px;
+        }
+      }
+
+      &.is-active {
+        border-bottom: solid 1px #707070;
+      }
+    }
+  }
+
+  &-inner {
+    max-width: 1266px;
+    margin: 45px auto 0;
+    padding: 0 2%;
+
+    @include mq("sp") {
+      max-width: $sp-inner;
+      margin: 40px auto 0;
+    }
+
+    @include mq("tab") {
+      max-width: $tab-inner;
+      padding: 0;
+    }
+  }
+
+  &-list {
+    display: none;
+
+    &.is-show {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 46px;
+      row-gap: 20px;
+
+      @media screen and (max-width: 1024px) {
+        display: block;
+      }
+    }
+  }
+
+  &-item {
+    background: #f6f6f6;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+    }
+
+    @include mq("sp") {
+      height: auto;
+    }
+
+    @include mq("tab") {
+      width: 100%;
+    }
+
+    &:nth-of-type(2n) {
+      @media screen and (max-width: 1024px) {
+        margin-left: 0;
+      }
+    }
+
+    &-link {
+      display: flex;
+      padding: 16px 20px 15px 14px;
+      height: 100%;
+
+      @media screen and (min-width: 1025px) {
+        transition: all 0.3s ease 0s;
+
+        &:hover {
+          opacity: 0.6;
+          transition: all 0.3s ease 0s;
+        }
+      }
+
+      @include mq("sp") {
+        padding: 10px;
+      }
+
+      @include mq("tab") {
+        padding: 15px;
+      }
+    }
+
+    &-head {
+      max-width: 103px;
+      height: 100px;
+
+      @include mq("sp") {
+        max-width: 50px;
+        height: 50px;
+        width: 100%;
+      }
+
+      @include mq("tab") {
+        max-width: 130px;
+        height: 100%;
+      }
+
+      img {
+        height: 100%;
+      }
+    }
+
+    &-body {
+      margin-left: 30px;
+      @media screen and (max-width: 1024px) {
+        margin-left: 15px;
+      }
+    }
+
+    &-date {
+      font-size: 14px;
+
+      @include mq("sp") {
+        font-size: 12px;
+      }
+
+      @include mq("tab") {
+        font-size: 16px;
+      }
+    }
+
+    &-title {
+      margin-top: 0px;
+      line-height: (32 / 16);
+
+      @include mq("sp") {
+        font-size: 13px;
+        line-height: 1;
+        margin-top: 3px;
+      }
+
+      @include mq("tab") {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+/*==========================================================================
+
+# access
+
+========================================================================== */
+.access {
+  padding-bottom: 110px;
+  background-image: url(../img/bg/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include mq("sp") {
+    padding-bottom: 80px;
+  }
+
+  &-inner {
+    max-width: 1480px;
+    padding: 0 1%;
+
+    @include mq("sp") {
+      max-width: $sp-inner;
+    }
+
+    @include mq("tab") {
+      max-width: $tab-inner;
+      padding: 0;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    margin-top: 76px;
+    padding-left: 9%;
+
+    @media screen and (max-width: 1024px) {
+      display: block;
+      margin-top: 40px;
+      padding-left: 0;
+    }
+  }
+
+  &-picture {
+    max-width: 656px;
+    height: 370px;
+
+    @include mq("pc") {
+      max-height: 19.2vw;
+    }
+
+    @media screen and (max-width: 1024px) {
+      height: auto;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    @include mq("tab") {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    img {
+      height: auto;
+    }
+  }
+
+  &-info {
+    margin-left: 83px;
+
+    @include mq("sp") {
+      margin-left: 0;
+      font-size: 14px;
+    }
+
+    @include mq("tab") {
+      margin-left: 0;
+      padding: 0 40px;
+    }
+
+    dl {
+      margin-top: 19px;
+    }
+
+    dt {
+      font-weight: $extrabold;
+
+      &:not(:first-child) {
+        margin-top: 15px;
+
+        @include mq("sp") {
+          margin-top: 15px;
+        }
+
+        @include mq("tab") {
+          margin-top: 30px;
+        }
+      }
+    }
+
+    dd {
+      margin-top: 15px;
+      line-height: (32 / 16);
+      @include mq("sp") {
+        margin-top: 5px;
+        line-height: 1.5;
+      }
+
+      @include mq("tab") {
+        margin-top: 10px;
+        line-height: 1.7;
+      }
+
+      span {
+        display: block;
+        margin-top: 9px;
+        @include mq("sp") {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+
+  &-iframe-wrapper {
+    width: 100%;
+    max-width: 792px;
+    margin: 69px auto 0;
+
+    @include mq("sp") {
+      margin: 40px auto 0;
+    }
+
+    @include mq("tab") {
+      padding: 0 40px;
+    }
+  }
+
+  &-iframe {
+    position: relative;
+    width: 100%;
+    padding-top: (592 / 792 * 100%);
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+/*==========================================================================
+
+# 下層ページ
+
+========================================================================== */
+/*
+# lower-header
+==================================== */
+.lower-header {
+  background-color: $main-color;
+
+  .header-nav-item {
+    a {
+      color: $font-main;
+    }
+  }
+}
+/*
+# lower-mv
+==================================== */
+.lower-mv {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 26vw;
+  margin-top: 80px;
+
+  @include mq("sp") {
+    margin-top: 60px;
+    height: 130vw;
+    background-position: center center;
+  }
+
+  @include mq("tab") {
+    height: 70vw;
+    background-position: center center;
+  }
+
+  &-title {
+    color: $main-color;
+    text-align: center;
+    font-size: 34px;
+    font-weight: $extrabold;
+    padding: 12.1% 0;
+
+    @include mq("sp") {
+      padding: 60% 0;
+    }
+
+    @include mq("tab") {
+      padding: 32.5% 0;
+    }
+  }
+
+  &-menu {
+    background-image: url(../img/bg/menu-header.jpg);
+  }
+
+  &-room {
+    background-image: url(../img/bg/room-header.jpg);
+  }
+
+  &-spa {
+    background-image: url(../img/bg/spa-header.jpg);
+  }
+}
+
+/*
+# breadcrumb
+==================================== */
+.breadcrumb {
+  margin-top: 37px;
+
+  &-list {
+    display: flex;
+  }
+
+  &-item {
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+
+    &.prev {
+      position: relative;
+      padding-right: 10px;
+
+      &::after {
+        position: absolute;
+        content: ">";
+        width: 8px;
+        height: 16px;
+        top: 0;
+        right: -3px;
+      }
+    }
+  }
+}
+
+/*
+# lower-about
+==================================== */
+.lower-about {
+  margin-top: 89px;
+  padding-bottom: 150px;
+
+  @include mq("sp") {
+    padding-bottom: 80px;
+    margin-top: 70px;
+  }
+
+  @include mq("tab") {
+    margin-top: 80px;
+    padding-bottom: 100px;
+  }
+
+  &-spa {
+    padding-bottom: 156.5px;
+
+    @include mq("sp") {
+      padding-bottom: 80px;
+    }
+  }
+
+  &-title {
+    text-align: center;
+    line-height: (32 / 16);
+
+    @include mq("sp") {
+      font-size: 15px;
+      text-align: left;
+    }
+
+    @include mq("tab") {
+      font-size: 15px;
+    }
+  }
+
+  &-wrapper {
+    margin-top: 125px;
+  }
+
+  &-box {
+    display: flex;
+
+    @media screen and (max-width: 1024px) {
+      display: block;
+    }
+
+    &:not(:first-child) {
+      margin-top: 141px;
+
+      @include mq("sp") {
+        margin-top: 120px;
+      }
+    }
+
+    &:nth-child(2n + 1) {
+      .lower-about-info {
+        padding-left: 238px;
+        padding-right: 20px;
+
+        @include mq("sp") {
+          padding: 50px 20px;
+        }
+
+        @include mq("tab") {
+          padding-left: 50px;
+          margin-left: auto;
+          margin-top: -40px;
+        }
+      }
+
+      &:nth-child(1) {
+        .lower-about-info-tips {
+          padding-left: 6px;
+        }
+      }
+
+      .lower-about-picture {
+        margin-right: -158px;
+
+        @include mq("sp") {
+          margin-right: 0;
+        }
+      }
+    }
+
+    &:nth-child(2n) {
+      flex-direction: row-reverse;
+
+      .lower-about-info {
+        padding-left: 60px;
+        padding-right: 209px;
+
+        @include mq("sp") {
+          padding: 50px 20px;
+        }
+
+        @include mq("tab") {
+          margin-top: -40px;
+          padding-left: 45px;
+          padding-right: 40px;
+        }
+      }
+
+      .lower-about-picture {
+        margin-left: -159px;
+
+        @include mq("sp") {
+          margin-left: 0;
+        }
+
+        @include mq("tab") {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+
+  &-picture {
+    width: 525px;
+    height: 300px;
+    margin-top: -57px;
+    position: relative;
+    z-index: 1;
+
+    @include mq("pc") {
+    }
+
+    @include mq("sp") {
+      width: 100%;
+    }
+
+    @include mq("tab") {
+      max-width: 400px;
+      height: 270px;
+    }
+
+    img {
+      height: 100%;
+    }
+  }
+
+  &-info {
+    background-image: url(../img/bg/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-grow: 2;
+    padding-top: 60px;
+    height: 381px;
+    width: 813px;
+
+    @include mq("sp") {
+      min-width: 335px;
+      width: 100%;
+      min-height: 0;
+      height: auto;
+    }
+
+    @include mq("tab") {
+      min-width: 0;
+      width: 87%;
+      padding: 80px 45px;
+      min-height: 0;
+      height: auto;
+    }
+
+    &-title {
+      font-size: 24px;
+      @include mq("sp") {
+        font-size: 20px;
+      }
+    }
+
+    &-text {
+      line-height: (32 / 16);
+      margin-top: 43px;
+      @include mq("sp") {
+        line-height: 1.8;
+        margin-top: 25px;
+        font-size: 15px;
+      }
+
+      @include mq("tab") {
+        margin-top: 30px;
+      }
+    }
+
+    &-tips {
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: (21 / 14);
+      @include mq("sp") {
+        margin-top: 25px;
+        font-size: 13px;
+      }
+
+      @include mq("tab") {
+        margin-top: 30px;
+      }
+    }
+  }
+}
+
+/*
+# efficacy
+==================================== */
+.efficacy {
+  padding: 95.5px 0 72px;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 96.5px;
+
+  @media screen and (max-width: 1024px) {
+    width: 100vw;
+    margin: 0 calc(50% - 50vw) 80px;
+  }
+
+  @include mq("sp") {
+    padding: 60px 0;
+  }
+
+  @include mq("tab") {
+    padding: 80px 0;
+  }
+
+  &-title {
+    font-size: 26px;
+    text-align: center;
+
+    @include mq("sp") {
+      font-size: 24px;
+    }
+  }
+
+  &-wrapper {
+    margin: 47px auto 0;
+    max-width: 880px;
+
+    @include mq("sp") {
+      margin: 40px 30px 0;
+    }
+
+    @include mq("tab") {
+      margin: 51.5px 50px 0;
+    }
+  }
+
+  &-item {
+    display: flex;
+    border-top: solid 1px #e7e7e7;
+    padding: 14px 0 13px;
+
+    &:last-child {
+      border-bottom: 1px solid #e7e7e7;
+    }
+
+    dt {
+      width: 220px;
+      padding-top: 2px;
+      padding-left: 2px;
+      @include mq("sp") {
+        width: 30%;
+        font-size: 14px;
+      }
+
+      @include mq("tab") {
+        width: 20%;
+      }
+    }
+
+    dd {
+      width: calc(100% - 220px);
+      font-size: 15px;
+      line-height: (22 / 15);
+
+      @include mq("sp") {
+        width: 70%;
+        font-size: 13px;
+      }
+
+      @include mq("tab") {
+        width: 80%;
+      }
+    }
+  }
+}
+
+/*==========================================================================
+
+# footer
+
+========================================================================== */
+.footer {
+  background-image: url(../img/bg/bg3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &-top {
+    padding: 64px 0 48px 0;
+
+    @include mq("sp") {
+      padding: 40px 0 30px;
+    }
+  }
+
+  &-nav {
+    &-list {
+      -ms-writing-mode: tb-rl;
+      writing-mode: vertical-rl;
+      margin: 0 auto;
+      letter-spacing: 4.2px;
+    }
+
+    &-item {
+      font-size: 18px;
+
+      &:not(:first-of-type) {
+        margin-right: 32px;
+        @include mq("sp") {
+          margin-right: 28px;
+        }
+      }
+
+      @media screen and (min-width: 1025px) {
+        a {
+          transition: all 0.3s ease 0s;
+
+          &:hover {
+            opacity: 0.6;
+            transition: all 0.3s ease 0s;
+          }
+        }
+      }
+    }
+  }
+
+  &-logo {
+    width: 145px;
+    margin: 94px auto 0;
+
+    @include mq("sp") {
+      width: 130px;
+      margin: 50px auto 0;
+    }
+
+    @include mq("tab") {
+      margin: 60px auto 0;
+    }
+
+    @media screen and (min-width: 1025px) {
+      a {
+        transition: all 0.3s ease 0s;
+
+        &:hover {
+          opacity: 0.6;
+          transition: all 0.3s ease 0s;
+        }
+      }
+    }
+  }
+
+  &-address {
+    margin-top: 60px;
+    text-align: center;
+    line-height: 2.5;
+    padding-left: 10px;
+
+    @include mq("sp") {
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: 2.3;
+    }
+
+    @include mq("tab") {
+      margin-top: 60px;
+      line-height: 2;
+    }
+
+    .is-address {
+      margin-left: 21px;
+      letter-spacing: 2.88px;
+      @include mq("sp") {
+        margin-left: 15px;
+      }
+    }
+
+    .is-fax {
+      margin-left: 20px;
+    }
+  }
+
+  &-bottom {
+    background-color: #000000;
+    text-align: center;
+    padding: 23px 0 25px;
+    @include mq("sp") {
+      padding: 23px;
+    }
+  }
+
+  &-copyright {
+    color: $main-color;
+    font-size: 12px;
+  }
+}
